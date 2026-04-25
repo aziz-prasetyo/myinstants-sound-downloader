@@ -16,6 +16,16 @@ A lightning-fast, interactive Command Line Interface (CLI) application to batch 
 
 ---
 
+## ⚠️ Important Notice Regarding File Size
+
+> You might notice that the compiled executable files are quite large (ranging from ~30MB to 110MB+ depending on the OS and compression). **This is expected behavior and not a bug.**
+
+> Unlike applications written in natively compiled languages (like Go, Rust, or C++), this tool is built using TypeScript and the Bun runtime. To ensure this application runs completely standalone—meaning end-users **do not** need to install Node.js, Bun, or any other dependencies on their computers—the _entire Bun JavaScript engine and runtime_ is packaged directly inside the executable.
+
+> This is a conscious engineering trade-off: **zero setup and maximum user convenience at the cost of a larger file size.**
+
+---
+
 ## How to Use (For Regular Users)
 
 You don't need to be a programmer or install any coding tools to use this app. Just download the executable file for your operating system from the **[Releases](../../releases)** page.
@@ -63,7 +73,9 @@ Clone the repository and install the dependencies:
 
 ```bash
 git clone https://github.com/aziz-prasetyo/myinstants-sound-downloader.git
+
 cd myinstants-sound-downloader
+
 bun install
 ```
 
