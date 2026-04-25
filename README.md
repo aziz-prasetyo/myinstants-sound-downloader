@@ -5,6 +5,8 @@
 
 A lightning-fast, interactive Command Line Interface (CLI) application to batch download audio memes and sound effects from [Myinstants.com](https://www.myinstants.com). Built with Bun and TypeScript, this tool offers a beautiful terminal UI, real-time streaming progress, and cross-platform compatibility.
 
+![Myinstants Sound Downloader - Thumbnail](./assets/myinstants-sound-downloader-thumbnail.png)
+
 ## Key Features
 
 - **Interactive UI**: Beautiful and intuitive terminal prompts powered by `@clack/prompts`.
