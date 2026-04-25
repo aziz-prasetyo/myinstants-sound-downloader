@@ -1,6 +1,26 @@
 import pc from 'picocolors';
+import readline from 'readline';
 import { runCli } from './cli';
 import { runDownloader } from './downloader';
+import { confirm, isCancel } from '@clack/prompts';
+
+/**
+ * Pauses the terminal before exiting.
+ * Prevents the OS from immediately closing the window when the standalone executable finishes.
+ */
+async function pauseAndExit(exitCode: number = 0) {
+	const rl = readline.createInterface({
+		input: process.stdin,
+		output: process.stdout,
+	});
+
+	await new Promise((resolve) => {
+		rl.question(pc.dim('\nPress ENTER to close this window...'), resolve);
+	});
+
+	rl.close();
+	process.exit(exitCode);
+}
 
 /**
  * Bootstraps the application.
@@ -9,21 +29,39 @@ import { runDownloader } from './downloader';
  */
 async function main() {
 	try {
-		const config = await runCli();
+		let keepRunning = true;
 
-		// Contextual exit: Occurs if the user safely aborts via prompt commands (e.g., Ctrl+C in Clack)
-		if (!config) {
-			process.exit(0);
+		while (keepRunning) {
+			const config = await runCli();
+
+			// Contextual exit: Occurs if the user safely aborts via prompt commands (e.g., Ctrl+C in Clack)
+			if (!config) {
+				break;
+			}
+
+			await runDownloader(config);
+
+			// Interactive prompt to allow users to continue without reopening the app
+			const shouldRestart = await confirm({
+				message: 'Do you want to download more sounds or categories?',
+				initialValue: false, // Defaults to "No" for safe exiting
+			});
+
+			if (isCancel(shouldRestart) || !shouldRestart) {
+				keepRunning = false;
+			}
 		}
 
-		await runDownloader(config);
+		console.log(pc.green('\nThank you for using Myinstants Sound Downloader!'));
+		await pauseAndExit(0);
 	} catch (error) {
-		// Failsafe for unhandled exceptions outside the operational boundaries
+		// Failsafe for unhandled exceptions
+		// The pause ensures the user can actually read the error stack trace before the terminal closes
 		console.error(
 			pc.red('\nA fatal error occurred during execution. Stack trace provided below:\n')
 		);
 		console.error(error);
-		process.exit(1);
+		await pauseAndExit(1);
 	}
 }
 
