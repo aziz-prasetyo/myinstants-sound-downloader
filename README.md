@@ -93,14 +93,14 @@ This project strictly enforces code quality using ESLint and Prettier.
 
 - **Format code:** `bun format`
 - **Lint code:** `bun lint`
-- **Auto-fix linting errors:** `bun run lint:fix`
+- **Auto-fix linting errors:** `bun lint:fix`
 
 ### 4. Building the Releases (Cross-Compilation)
 
 To generate standalone executables for Windows, macOS, and Linux all at once, run:
 
 ```bash
-bun run build:release
+bun build:release
 ```
 
 The compiled binary files will be generated inside the `dist/` folder. _(Note: The `dist/` folder is ignored by Git to keep the repository clean)._
