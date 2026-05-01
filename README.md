@@ -1,4 +1,6 @@
-# Myinstants Sound Downloader
+<div align="center">
+    <h1 style="font-size: xx-large;">Myinstants Sound Downloader</h1>
+</div>
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 ![Bun](https://img.shields.io/badge/Bun-000000?style=for-the-badge&logo=bun&logoColor=white)
